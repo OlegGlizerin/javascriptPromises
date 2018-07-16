@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<img id="x" src="http://www.clker.com/cliparts/3/m/v/Y/E/V/small-red-apple-md.png" alt="Italian Trulli">
+<p>This is a paragraph.</p>
+
+
+<script>
+var img1 = document.querySelector('#x');
+console.log(img1.complete)
+img1.addEventListener('load', function() {
+  console.log("loaded");
+  console.log(img1.complete)
+});
+
+img1.addEventListener('error', function() {
+  console.log("broken");
+});
+
+
+
+function get(url) {
+  // Return a new promise.
+  return new Promise(function(resolve, reject) {
+    // Do the usual XHR stuff
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+
+    req.onload = function() {
+      // This is called even on 404 etc
+      // so check the status
+      if (req.status == 200) {
+        // Resolve the promise with the response text
+        resolve(req.response);
+      }
+      else {
+        // Otherwise reject with the status text
+        // which will hopefully be a meaningful error
+        reject(Error(req.statusText));
+      }
+    };
+
+    // Handle network errors
+    req.onerror = function() {
+      reject(Error("Network Error"));
+    };
+
+    // Make the request
+    req.send();
+  });
+}
+
+
+var x = get('')
+.then(function(response) {
+  console.log("Success!", response);
+ 
+}, function(error) {
+  console.error("Failed!", error);
+})
+.then(function(response) {
+	console.log("ben zona1")
+    console.log(x);
+    //resolve("resolved.");
+})
+.then(function(response) {
+	console.log("ben zona2")
+    console.log(x);
+    //resolve("resolved.");
+    return new Promise(function(resolve, reject) {
+    	resolve("all akbar");
+    });
+})
+.then(function(response) {
+	console.log(response);
+    var start = Date.now(),
+        now = start;
+    while (now - start < 2000) {
+      now = Date.now();
+    }
+	console.log("ben zona3")
+    
+    //resolve("resolved.");
+    
+});
+console.log("xxxx");
+x.then(function(response) {
+	console.log(response);
+    console.log("ben zona 4");
+});
+</script>
+</body>
+</html>
