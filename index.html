@@ -6,12 +6,12 @@
 <body>
 
 <h1>This is a Heading</h1>
-<img id="x" src="http://www.clker.com/cliparts/3/m/v/Y/E/V/small-red-apple-md.png" alt="Italian Trulli">
+<img id="myImage" src="http://www.clker.com/cliparts/3/m/v/Y/E/V/small-red-apple-md.png" alt="Italian Trulli">
 <p>This is a paragraph.</p>
 
 
 <script>
-var img1 = document.querySelector('#x');
+var img1 = document.querySelector('#myImage');
 console.log(img1.complete)
 img1.addEventListener('load', function() {
   console.log("loaded");
@@ -64,16 +64,16 @@ var x = get('')
   console.error("Failed!", error);
 })
 .then(function(response) {
-	console.log("ben zona1")
+	console.log("test1")
     console.log(x);
     //resolve("resolved.");
 })
 .then(function(response) {
-	console.log("ben zona2")
+	console.log("test2")
     console.log(x);
     //resolve("resolved.");
     return new Promise(function(resolve, reject) {
-    	resolve("all akbar");
+    	resolve("Got IT!");
     });
 })
 .then(function(response) {
@@ -83,15 +83,12 @@ var x = get('')
     while (now - start < 2000) {
       now = Date.now();
     }
-	console.log("ben zona3")
-    
-    //resolve("resolved.");
-    
+	console.log("test3")   
 });
 console.log("xxxx");
 x.then(function(response) {
 	console.log(response);
-    console.log("ben zona 4");
+    console.log("test4");
 });
 </script>
 </body>
